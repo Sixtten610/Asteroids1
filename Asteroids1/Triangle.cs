@@ -106,6 +106,7 @@ namespace Triangle2
         {
             if (Raylib.IsKeyReleased(KeyboardKey.KEY_SPACE))
             {
+                System.Console.WriteLine("Shoot");
                 return true;
             }
             else

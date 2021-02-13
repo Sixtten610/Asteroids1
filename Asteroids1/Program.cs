@@ -24,8 +24,11 @@ namespace Triangle2
 
                     if (triangle.Shoot() == true)
                     {
-                        Line line = new Line(triangle.TriangleX(), triangle.TriangleY(), triangle.TriangleV());
+                        Line2 line2 = new Line2(triangle.TriangleX(), triangle.TriangleY(), triangle.TriangleV());
                     }
+
+                    Line2.UpdateAll();
+                    Line2.DrawAll();
 
                     Raylib.EndDrawing();
                 }
