@@ -7,7 +7,7 @@ namespace Triangle2
     {
         static void Main(string[] args)
         {
-            Raylib.InitWindow(500, 500, "Opperation Window");
+            Raylib.InitWindow(1000, 1000, "Opperation Window");
             Raylib.SetTargetFPS(60);
 
             Triangle triangle = new Triangle();

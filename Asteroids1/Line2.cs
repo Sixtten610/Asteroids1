@@ -38,7 +38,7 @@ namespace Triangle2
 
         private void Update()
         {
-            hypotenuse =+ 0.05;
+            hypotenuse += 1;
 
             x = (Math.Cos(v) * hypotenuse) + OriginX;
             y = (Math.Sin(v) * hypotenuse) + OriginY;
@@ -46,13 +46,14 @@ namespace Triangle2
             originLine.X = ToFloat(x);
             originLine.Y = ToFloat(y);
 
-            System.Console.WriteLine(originLine.X + " | " + originLine.Y);
+            //System.Console.WriteLine(originLine.X + " | " + originLine.Y);
+            System.Console.WriteLine(v);
         }
         private void Draw()
         {
             Raylib.DrawRectanglePro(rectangle, originLine, rectRotation, Color.ORANGE);
 
-            Raylib.DrawRectangle(ToInt(x), ToInt(y), 50, 50, Color.ORANGE);
+            Raylib.DrawRectangle(ToInt(OriginX), ToInt(OriginY), 10, 10, Color.ORANGE);
         }
 
         // private bool Delete()
