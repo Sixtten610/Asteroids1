@@ -29,7 +29,7 @@ namespace Triangle2
 
                     Line2.UpdateAll();
                     Line2.DrawAll();
-
+                    
                     Raylib.EndDrawing();
                 }
 

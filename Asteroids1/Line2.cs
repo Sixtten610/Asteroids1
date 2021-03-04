@@ -19,7 +19,7 @@ namespace Triangle2
         private double v;
         private double hypotenuse = 1;
 
-        private float rectRotation = 0;
+        private double rectRotation = 0;
 
         public Line2(int xI, int yI, double vI)
         {
@@ -31,29 +31,37 @@ namespace Triangle2
 
             rectangle.width = 100;
             rectangle.height = 100;
-            rectRotation = ToFloat(v);
+
+            
+            // rectangle.x = 250;
+            // rectangle.y = 250;
+
+            rectRotation = Math.Sin(v);
+
+            System.Console.WriteLine(OriginX + " | " + OriginY);
 
             lines.Add(this);
         }
 
         private void Update()
         {
-            hypotenuse += 1;
+            hypotenuse -= 1; 
 
-            x = (Math.Cos(v) * hypotenuse) + OriginX;
-            y = (Math.Sin(v) * hypotenuse) + OriginY;
+            x = -((Math.Cos(v) * hypotenuse) + OriginX);
+            y = -((Math.Sin(v) * hypotenuse) + OriginY);
 
             originLine.X = ToFloat(x);
             originLine.Y = ToFloat(y);
 
+
             //System.Console.WriteLine(originLine.X + " | " + originLine.Y);
-            System.Console.WriteLine(v);
+            
         }
         private void Draw()
         {
-            Raylib.DrawRectanglePro(rectangle, originLine, rectRotation, Color.ORANGE);
+            Raylib.DrawRectanglePro(rectangle, originLine, ToFloat(rectRotation), Color.ORANGE);
 
-            Raylib.DrawRectangle(ToInt(OriginX), ToInt(OriginY), 10, 10, Color.ORANGE);
+            Raylib.DrawRectangle(ToInt(OriginX), ToInt(OriginY), 10, 10, Color.GREEN);
         }
 
         // private bool Delete()
