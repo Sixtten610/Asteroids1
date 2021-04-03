@@ -29,8 +29,8 @@ namespace Triangle2
             rect.x = ToFloat(OriginX);
             rect.y = ToFloat(OriginY);
 
-            rect.width = 100;
-            rect.height = 40;
+            rect.width = 70;
+            rect.height = 10;
 
             
             // rectangle.x = 250;
@@ -64,7 +64,7 @@ namespace Triangle2
         {
             Raylib.DrawRectanglePro(rect, rectCenterPointVector, ToFloat(r), Color.ORANGE);
 
-            Raylib.DrawRectangle(ToInt(OriginX), ToInt(OriginY), 10, 10, Color.GREEN);
+            //Raylib.DrawRectangle(ToInt(OriginX), ToInt(OriginY), 10, 10, Color.GREEN);
         }
 
         // private bool Delete()

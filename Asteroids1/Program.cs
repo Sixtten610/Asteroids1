@@ -23,7 +23,10 @@ namespace Triangle2
 
                     if (triangle.Shoot() == true)
                     {
-                        Line2 line2 = new Line2(triangle.TriangleX(), triangle.TriangleY(), triangle.TriangleV(), triangle.TriangleR());
+                        Line2 line2 = new Line2(
+                            triangle.TriangleX(), triangle.TriangleY(), 
+                            triangle.TriangleV(), triangle.TriangleR()
+                            );
                     }
 
                     System.Console.WriteLine(triangle.TriangleR());

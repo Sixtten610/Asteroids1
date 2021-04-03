@@ -100,11 +100,14 @@ namespace Triangle2
 
             xLine[1] = Math.Cos(rotation);
             yLine[1] = Math.Sin(rotation);
+            reRotation = Math.Cos(rotation + invert * 180);
         }
+
+        private double reRotation;
 
         public bool Shoot()
         {
-            if (Raylib.IsKeyReleased(KeyboardKey.KEY_SPACE))
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
                 System.Console.WriteLine("Shoot");
                 return true;
@@ -128,10 +131,15 @@ namespace Triangle2
         }
         public double TriangleR()
         {
-            double mycalcInRadians = Math.Asin(yLine[1]);
-            double mycalcInDegrees = mycalcInRadians * 180 / Math.PI;
-            
-            return mycalcInDegrees;
+            double mycalcInRadians = Math.Acos(xLine[1]);
+
+            return ConvertRadiansToDegrees(mycalcInRadians);
+        }
+
+        public static double ConvertRadiansToDegrees(double radians)
+        {
+            double degrees = (180 / Math.PI) * radians;
+            return (degrees);
         }
 
         static float ToFloat(double value)
