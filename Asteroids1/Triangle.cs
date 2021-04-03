@@ -129,20 +129,29 @@ namespace Triangle2
         {
             return rotation;
         }
+
         public double TriangleR()
         {
             double mycalcInRadians = Math.Acos(xLine[1]);
+            
+            double rotation = ConvertRadiansToDegrees(mycalcInRadians);
 
-            return ConvertRadiansToDegrees(mycalcInRadians);
+            if (yLine[1] < 0)
+            {
+                return -rotation;
+            }
+
+            return rotation;
         }
 
-        public static double ConvertRadiansToDegrees(double radians)
+        private double ConvertRadiansToDegrees(double radians)
         {
             double degrees = (180 / Math.PI) * radians;
+            
             return (degrees);
         }
 
-        static float ToFloat(double value)
+        private float ToFloat(double value)
         {
             return (float)value;
         }
