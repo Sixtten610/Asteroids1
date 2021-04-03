@@ -8,8 +8,8 @@ namespace Triangle2
     public class Line2
     {
         static List<Line2> lines = new List<Line2>();
-        Rectangle rectangle = new Rectangle();
-        Vector2 originLine = new Vector2();
+        Rectangle rect = new Rectangle();
+        Vector2 rectCenterPointVector = new Vector2();
 
 
         private double OriginX;
@@ -17,41 +17,44 @@ namespace Triangle2
         private double x;
         private double y;
         private double v;
+        private double r;
         private double hypotenuse = 1;
 
-        private double rectRotation = 0;
-
-        public Line2(int xI, int yI, double vI)
+        public Line2(int xI, int yI, double vI, double rI)
         {
             OriginX = xI;
             OriginY = yI;
             v = vI;
-            originLine.X = ToFloat(OriginX);
-            originLine.Y = ToFloat(OriginY);
+            r = rI;
+            rect.x = ToFloat(OriginX);
+            rect.y = ToFloat(OriginY);
 
-            rectangle.width = 100;
-            rectangle.height = 100;
+            rect.width = 100;
+            rect.height = 40;
 
             
             // rectangle.x = 250;
             // rectangle.y = 250;
 
-            rectRotation = Math.Sin(v);
+            // rectRotation = Math.Sin(v);            
 
-            System.Console.WriteLine(OriginX + " | " + OriginY);
+
+            //System.Console.WriteLine(rectRotation);
+            //System.Console.WriteLine(OriginX + " | " + OriginY);
 
             lines.Add(this);
         }
 
         private void Update()
         {
-            hypotenuse -= 1; 
+            hypotenuse -= 1;
 
-            x = -((Math.Cos(v) * hypotenuse) + OriginX);
-            y = -((Math.Sin(v) * hypotenuse) + OriginY);
+            x = ((Math.Cos(v) * hypotenuse) + OriginX);
+            y = ((Math.Sin(v) * hypotenuse) + OriginY);
 
-            originLine.X = ToFloat(x);
-            originLine.Y = ToFloat(y);
+
+            rect.x = ToFloat(x);
+            rect.y = ToFloat(y);
 
 
             //System.Console.WriteLine(originLine.X + " | " + originLine.Y);
@@ -59,7 +62,7 @@ namespace Triangle2
         }
         private void Draw()
         {
-            Raylib.DrawRectanglePro(rectangle, originLine, ToFloat(rectRotation), Color.ORANGE);
+            Raylib.DrawRectanglePro(rect, rectCenterPointVector, ToFloat(r), Color.ORANGE);
 
             Raylib.DrawRectangle(ToInt(OriginX), ToInt(OriginY), 10, 10, Color.GREEN);
         }

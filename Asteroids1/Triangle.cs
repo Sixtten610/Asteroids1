@@ -126,6 +126,13 @@ namespace Triangle2
         {
             return rotation;
         }
+        public double TriangleR()
+        {
+            double mycalcInRadians = Math.Asin(yLine[1]);
+            double mycalcInDegrees = mycalcInRadians * 180 / Math.PI;
+            
+            return mycalcInDegrees;
+        }
 
         static float ToFloat(double value)
         {

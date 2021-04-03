@@ -17,15 +17,16 @@ namespace Triangle2
                     Raylib.BeginDrawing();
                     Raylib.ClearBackground(Color.BLACK);
 
-                    
                     triangle.Mechanics();
                     triangle.Update();
                     triangle.Draw();
 
                     if (triangle.Shoot() == true)
                     {
-                        Line2 line2 = new Line2(triangle.TriangleX(), triangle.TriangleY(), triangle.TriangleV());
+                        Line2 line2 = new Line2(triangle.TriangleX(), triangle.TriangleY(), triangle.TriangleV(), triangle.TriangleR());
                     }
+
+                    System.Console.WriteLine(triangle.TriangleR());
 
                     Line2.UpdateAll();
                     Line2.DrawAll();
