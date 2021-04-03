@@ -29,8 +29,8 @@ namespace Triangle2
             rect.x = ToFloat(OriginX);
             rect.y = ToFloat(OriginY);
 
-            rect.width = 70;
-            rect.height = 10;
+            rect.width = 7;
+            rect.height = 1;
 
             
             // rectangle.x = 250;
@@ -47,7 +47,7 @@ namespace Triangle2
 
         private void Update()
         {
-            hypotenuse -= 1;
+            hypotenuse -= 10;
 
             x = ((Math.Cos(v) * hypotenuse) + OriginX);
             y = ((Math.Sin(v) * hypotenuse) + OriginY);
@@ -67,23 +67,23 @@ namespace Triangle2
             //Raylib.DrawRectangle(ToInt(OriginX), ToInt(OriginY), 10, 10, Color.GREEN);
         }
 
-        // private bool Delete()
-        // {
-        //     if (x > 600 || y > 600 || x < 600 || y < 600)
-        //     {
-        //         return true;
-        //     }
-        //     return false;
-        // }
+        private bool Delete()
+        {
+            if (x > 1000 || y > 1000 || x < 0 || y < 0)
+            {
+                return true;
+            }
+            return false;
+        }
         public static void UpdateAll()
         {
             for (int index = lines.Count - 1; index > 0; index--)
             {
                 lines[index].Update();
-                // if (lines[index].Delete() == true)
-                // {
-                //     lines.Remove(lines[index]);
-                // }
+                if (lines[index].Delete() == true)
+                {
+                    lines.Remove(lines[index]);
+                }
             }
         }
         public static void DrawAll()

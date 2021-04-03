@@ -102,12 +102,12 @@ namespace Triangle2
             yLine[1] = Math.Sin(rotation);
             reRotation = Math.Cos(rotation + invert * 180);
         }
-
         private double reRotation;
 
         public bool Shoot()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE))
             {
                 System.Console.WriteLine("Shoot");
                 return true;

@@ -28,9 +28,6 @@ namespace Triangle2
                             triangle.TriangleV(), triangle.TriangleR()
                             );
                     }
-
-                    System.Console.WriteLine(triangle.TriangleR());
-
                     Line2.UpdateAll();
                     Line2.DrawAll();
                     
