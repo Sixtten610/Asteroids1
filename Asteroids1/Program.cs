@@ -7,10 +7,10 @@ namespace Triangle2
     {
         static void Main(string[] args)
         {
-            Raylib.InitWindow(1000, 1000, "Opperation Window");
+            Raylib.InitWindow(1000, 1000, "Operation Window");
             Raylib.SetTargetFPS(60);
 
-            Triangle triangle = new Triangle();
+            Triangle triangle = new Triangle(KeyboardKey.KEY_W, KeyboardKey.KEY_S, KeyboardKey.KEY_A, KeyboardKey.KEY_D);
 
             while (!Raylib.WindowShouldClose())
                 {
@@ -24,8 +24,8 @@ namespace Triangle2
                     if (triangle.Shoot() == true)
                     {
                         Line2 line2 = new Line2(
-                            triangle.TriangleX(), triangle.TriangleY(), 
-                            triangle.TriangleV(), triangle.TriangleR()
+                            triangle.TriangleX, triangle.TriangleY, 
+                            triangle.TriangleV, triangle.TriangleRot
                             );
                     }
                     Line2.UpdateAll();

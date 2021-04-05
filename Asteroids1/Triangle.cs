@@ -9,8 +9,8 @@ namespace Triangle2
         // TRIANGLE #########################################################
         private Vector2[] pointTriangle = new Vector2[3];
 
-        private int xPlanePos = 250;
-        private int yPlanePos = 250;
+        private int xPlanePos = 500;
+        private int yPlanePos = 500;
 
         private int planeMoveSpeed = 2; 
         private double rotation = 1.565;
@@ -26,9 +26,30 @@ namespace Triangle2
         private Vector2[] pointLine = new Vector2[2];
         private double[] xLine = {0, 0};
         private double[] yLine = {0, 0};
+        
+        // KEY INPUTS ########################################################
+
+        protected KeyboardKey[] keyInputs;
+
+        public Triangle(KeyboardKey up, KeyboardKey down, KeyboardKey left, KeyboardKey right)
+        {
+            keyInputs = new KeyboardKey[4];
+
+            keyInputs[0] = up;
+            keyInputs[1] = down;
+            keyInputs[2] = left;
+            keyInputs[3] = right;
+
+        }
 
         public void Update()
         {
+            // int tes = Raylib.GetKeyPressed();
+
+            // var yes = (KeyboardKey)87;
+
+            //System.Console.WriteLine(yes);
+
             for (int i = 0; i < 3; i++)
             {
                 pointTriangle[i].X = (xPlanePos);
@@ -62,20 +83,33 @@ namespace Triangle2
 
         public void Mechanics()
         {
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
-            {yPlanePos -= planeMoveSpeed;}
-            else if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
-            {yPlanePos += planeMoveSpeed;}
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
-            {xPlanePos -= planeMoveSpeed;}
-            else if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
-            {xPlanePos += planeMoveSpeed;}
+            int t = 87;
+            var yes = (KeyboardKey)t;
 
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT) == true)
+            KeyboardKey test = (KeyboardKey)87;
+
+            if (Raylib.IsKeyDown(test))
+            {
+                yPlanePos -= planeMoveSpeed;
+            }
+            else if (Raylib.IsKeyDown(keyInputs[1]))
+            {
+                yPlanePos += planeMoveSpeed;
+            }
+            if (Raylib.IsKeyDown(keyInputs[2]))
+            {
+                xPlanePos -= planeMoveSpeed;
+            }
+            else if (Raylib.IsKeyDown(keyInputs[3]))
+            {
+                xPlanePos += planeMoveSpeed;
+            }
+
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
             {
                 rotation -= moveConstantOfDegrees;
             }
-            else if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT) == true)
+            else if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
             {
                 rotation += moveConstantOfDegrees;
             }
@@ -100,9 +134,7 @@ namespace Triangle2
 
             xLine[1] = Math.Cos(rotation);
             yLine[1] = Math.Sin(rotation);
-            reRotation = Math.Cos(rotation + invert * 180);
         }
-        private double reRotation;
 
         public bool Shoot()
         {
@@ -117,20 +149,53 @@ namespace Triangle2
                 return false;
             }
         }
-        public int TriangleX()
+
+        public int TriangleX
         {
-            return xPlanePos;
+            get
+            {
+                return xPlanePos;
+            } 
+            private set
+            {
+
+            }
         }
-        public int TriangleY()
+        public int TriangleY
         {
-            return yPlanePos;
+            get
+            {
+                return yPlanePos;
+            } 
+            private set
+            {
+
+            }
         }
-        public double TriangleV()
+        public double TriangleV
         {
-            return rotation;
+            get
+            {
+                return rotation;
+            } 
+            private set
+            {
+
+            }
+        }
+        public double TriangleRot
+        {
+            get
+            {
+                return TriangleR();
+            } 
+            private set
+            {
+
+            }
         }
 
-        public double TriangleR()
+        private double TriangleR()
         {
             double mycalcInRadians = Math.Acos(xLine[1]);
             
@@ -144,6 +209,7 @@ namespace Triangle2
             return rotation;
         }
 
+        // "https://www.oreilly.com/library/view/c-cookbook/0596003390/ch01s03.html"
         private double ConvertRadiansToDegrees(double radians)
         {
             double degrees = (180 / Math.PI) * radians;
