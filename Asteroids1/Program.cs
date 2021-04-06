@@ -17,16 +17,24 @@ namespace Triangle2
                     Raylib.BeginDrawing();
                     Raylib.ClearBackground(Color.BLACK);
 
+                    if(Raylib.IsKeyPressed(KeyboardKey.KEY_KP_ENTER))
+                    {
+                        Asteroid asteroid = new Asteroid();
+                    }
+                    Asteroid.UpdateAll();
+                    Asteroid.DrawAll();
+
                     triangle.Mechanics();
                     triangle.Update();
                     triangle.Draw();
 
                     if (triangle.Shoot() == true)
                     {
-                        Line2 line2 = new Line2(
+                        Line2 line2 = new Line2
+                        (
                             triangle.TriangleX, triangle.TriangleY, 
-                            triangle.TriangleV, triangle.TriangleRot
-                            );
+                            triangle.TriangleV, triangle.TriangleR
+                        );
                     }
                     Line2.UpdateAll();
                     Line2.DrawAll();

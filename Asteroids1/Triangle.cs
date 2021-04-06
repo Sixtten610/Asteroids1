@@ -139,7 +139,7 @@ namespace Triangle2
         public bool Shoot()
         {
 
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE))
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
                 System.Console.WriteLine("Shoot");
                 return true;
@@ -155,10 +155,6 @@ namespace Triangle2
             get
             {
                 return xPlanePos;
-            } 
-            private set
-            {
-
             }
         }
         public int TriangleY
@@ -166,10 +162,6 @@ namespace Triangle2
             get
             {
                 return yPlanePos;
-            } 
-            private set
-            {
-
             }
         }
         public double TriangleV
@@ -177,25 +169,17 @@ namespace Triangle2
             get
             {
                 return rotation;
-            } 
-            private set
-            {
-
             }
         }
-        public double TriangleRot
+        public double TriangleR
         {
             get
             {
-                return TriangleR();
-            } 
-            private set
-            {
-
+                return TriangleRot();
             }
         }
 
-        private double TriangleR()
+        private double TriangleRot()
         {
             double mycalcInRadians = Math.Acos(xLine[1]);
             
