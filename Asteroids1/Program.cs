@@ -12,6 +12,8 @@ namespace Triangle2
 
             Triangle triangle = new Triangle(KeyboardKey.KEY_W, KeyboardKey.KEY_S, KeyboardKey.KEY_A, KeyboardKey.KEY_D);
 
+            int time = 0;
+
             while (!Raylib.WindowShouldClose())
                 {
                     Raylib.BeginDrawing();
@@ -19,10 +21,23 @@ namespace Triangle2
 
                     if(Raylib.IsKeyPressed(KeyboardKey.KEY_KP_ENTER))
                     {
-                        Asteroid asteroid = new Asteroid();
+                        
                     }
-                    Asteroid.UpdateAll();
-                    Asteroid.DrawAll();
+
+                    if (time == 10)
+                    {
+                        Asteroid2 asteroid2 = new Asteroid2();
+                        time = 0;
+                    }
+                    else
+                    {
+                        time++;
+                    }
+
+                    Asteroid2.UpdateAll();
+                    Asteroid2.DrawAll();
+
+
 
                     triangle.Mechanics();
                     triangle.Update();

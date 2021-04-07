@@ -7,17 +7,9 @@ namespace Triangle2
 {
     public class Line2
     {
-        public static List<Line2> lines = new List<Line2>();
-        public Rectangle rect = new Rectangle();
+        private static List<Line2> lines = new List<Line2>();
+        Rectangle rect = new Rectangle();
         Vector2 rectCenterPointVector = new Vector2();
-
-        public List<Line2> GetLines
-        {
-            get
-            {
-                return lines;
-            }
-        }
 
         private double OriginX;
         private double OriginY;
@@ -26,6 +18,8 @@ namespace Triangle2
         private double v;
         private double r;
         private double hypotenuse = 1;
+
+        private int damage = 100;
 
         public Line2(int xI, int yI, double vI, double rI)
         {
@@ -84,6 +78,33 @@ namespace Triangle2
             {
                 lines[index].Draw();
             }
+        }
+
+        public static List<Line2> GetLines
+        {
+            get
+            {
+                return lines;
+            }
+        }
+        public Rectangle GetRect
+        {
+            get
+            {
+                return rect;
+            }
+        }
+        public int GetDamage
+        {
+            get
+            {
+                return damage;
+            }
+        }
+
+        public static void RemoceInstanceOfLine(int index)
+        {
+            lines.Remove(lines[index]);
         }
 
         static float ToFloat(double value)

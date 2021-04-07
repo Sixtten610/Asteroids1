@@ -87,6 +87,15 @@ namespace Triangle2
             var yes = (KeyboardKey)t;
 
             KeyboardKey test = (KeyboardKey)87;
+            
+            // Switch test (kanske istället för if&if-else?):
+            // int key = Raylib.GetKeyPressed();
+            // switch (key)
+            // {
+            //     case 87:
+            //     yPlanePos -= planeMoveSpeed;
+            //     break;
+            // }
 
             if (Raylib.IsKeyDown(test))
             {

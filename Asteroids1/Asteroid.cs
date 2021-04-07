@@ -11,21 +11,19 @@ namespace Triangle2
 
         Rectangle rectangle = new Rectangle();
 
-        Vector2 centerOfRect = new Vector2(0 ,0);
+        Vector2 centerOfRect = new Vector2(50 ,50);
         static Random generator = new Random();
 
-
         float randDegree = generator.Next(0, 360);
-        // float OriginX = generator.Next(0, 1000);
-        // float OriginY = generator.Next(0, 1000);
+        float OriginX = generator.Next(0, 1000);
+        float OriginY = generator.Next(0, 1000);
 
-        float OriginX = 500;
-        float OriginY = 500;
+        // float OriginX = 500;
+        // float OriginY = 500;
         
         private double x;
         private double y;
         double hypotenuse = 1;
-        
 
         public Asteroid()
         {
@@ -57,12 +55,12 @@ namespace Triangle2
             }
         }
 
-        private List<Line2> lineList = Line2.lines;
+        private List<Line2> lineList = Line2.GetLines;
         private bool Delete()
         {
             for (int index = lineList.Count - 1; index > 0; index--)
             {
-                if (Raylib.CheckCollisionRecs(lineList[index].rect, rectangle) == true)
+                if (Raylib.CheckCollisionRecs(lineList[index].GetRect, rectangle) == true)
                 {
                     return true;
                 }
@@ -81,11 +79,13 @@ namespace Triangle2
             rectangle.x = (float)x;
             rectangle.y = (float)y;
         }
-
+        Vector2 test = new Vector2(0,0);
+        Color colo = new Color(63,148,61,128);
         private void Draw()
         {
-            Raylib.DrawRectanglePro(rectangle, centerOfRect, 0, Color.GREEN);
+            
             Raylib.DrawRectanglePro(rectangle, centerOfRect, randDegree, Color.GOLD);
+            Raylib.DrawRectanglePro(rectangle, test, 0, colo);
             
         }
     }
