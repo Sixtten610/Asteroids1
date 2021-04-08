@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Collections.Generic;
 using System;
 using Raylib_cs;
 
@@ -147,7 +148,6 @@ namespace Triangle2
 
         public bool Shoot()
         {
-
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
                 System.Console.WriteLine("Shoot");
@@ -158,6 +158,57 @@ namespace Triangle2
                 return false;
             }
         }
+
+        private List<Asteroid2> asteroidList = Asteroid2.GetAsteroids;
+
+        public void Alive()
+        {
+            if (Delete())
+            {
+                System.Console.WriteLine("YOU DIED");
+                Console.ReadLine();
+            }
+
+        }
+        private bool Delete()
+        {
+            Vector2[] point = new Vector2[3];
+
+            for (int index = 0; index < 3; index++)
+            {
+                System.Console.WriteLine(index);
+                if (index == 0)
+                {
+                    point[index].X = xPlanePos;
+                    point[index].Y = yPlanePos;
+                }
+                else
+                {
+                    point[index].X = pointTriangle[index].X;
+                    point[index].Y = pointTriangle[index].Y;
+                }
+                               
+            }
+            
+            for (int index = asteroidList.Count - 1; index > 0; index--)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if (Raylib.CheckCollisionPointCircle(point[i], asteroidList[index].GetCirclePos, 60))
+                    {
+                        return true;
+                    }
+                }
+            }            
+
+            return false;
+        }
+
+
+
+
+
+
 
         public int TriangleX
         {

@@ -19,6 +19,8 @@ namespace Triangle2
                     Raylib.BeginDrawing();
                     Raylib.ClearBackground(Color.BLACK);
 
+                    triangle.Alive();
+
                     if(Raylib.IsKeyPressed(KeyboardKey.KEY_KP_ENTER))
                     {
                         

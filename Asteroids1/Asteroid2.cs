@@ -31,8 +31,8 @@ namespace Triangle2
 
         public Asteroid2()
         {
-            rectangle.x = OriginX;
-            rectangle.y = OriginY;
+            // rectangle.x = OriginX;
+            // rectangle.y = OriginY;
 
             rectangle.width = 100;
             rectangle.height = 100;
@@ -69,7 +69,8 @@ namespace Triangle2
             for (int index = asteroids.Count - 1; index > 0; index--)
             {
                 asteroids[index].Update();
-                if (asteroids[index].Delete() || asteroids[index].OutOfBounds())
+
+                if (asteroids[index].Delete() || asteroids[index].OutOfBounds(index))
                 {
                     asteroids.Remove(asteroids[index]);
                 }
@@ -83,9 +84,9 @@ namespace Triangle2
                 asteroids[index].Draw();
             }
         }
-        private bool OutOfBounds()
+        private bool OutOfBounds(int index)
         {
-            if (OriginX > 1250 || OriginY > 1250 || OriginX < -250 || OriginY < -250)
+            if (asteroids[index].x > 1250 || asteroids[index].y > 1250 || asteroids[index].x < -250 || asteroids[index].y < -250)
             {
                 System.Console.WriteLine("DEL");
                 return true;
@@ -126,5 +127,25 @@ namespace Triangle2
             Raylib.DrawRectanglePro(rectangle, centerOfRect, randDegree, Color.GOLD);
             Raylib.DrawCircleV(circlePos, 60, colo);
         }
+
+
+
+
+        public static List<Asteroid2> GetAsteroids
+        {
+            get
+            {
+                return asteroids;
+            }
+        }
+
+        public Vector2 GetCirclePos
+        {
+            get
+            {
+                return circlePos;
+            }
+        }
+
     }
 }
