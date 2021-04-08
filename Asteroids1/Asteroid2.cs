@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Collections.Generic;
 using System;
 using Raylib_cs;
@@ -12,31 +11,47 @@ namespace Triangle2
 
         Rectangle rectangle = new Rectangle();
 
-        Vector2 centerOfRect = new Vector2(50 ,50);
+        Vector2 centerOfRect;
         static Random generator = new Random();
 
         float randDegree = generator.Next(0, 360);
-        // float OriginX = generator.Next(0, 1000);
-        // float OriginY = generator.Next(0, 1000);
-
-        float OriginX = 500;
-        float OriginY = 500;
+        float OriginX;
+        float OriginY;
         
         private double x;
         private double y;
-        double hypotenuse = 10;
+        private double asteroidMoveSpeed;
+        private int hp;
 
         Vector2 circlePos;
+        Color InvisColorForHitbox = new Color(0,0,0,0);
+
+        Color asteroidColor;
 
 
         public Asteroid2()
         {
-            // rectangle.x = OriginX;
-            // rectangle.y = OriginY;
+            AsteroidSettings();
+            
+            SpawnLocation();
 
-            rectangle.width = 100;
-            rectangle.height = 100;
+            asteroids.Add(this);
+        }
+        
+        protected virtual void AsteroidSettings()
+        {
+            rectangle.width = rectangle.height = 100;
 
+            centerOfRect = new Vector2(rectangle.width/2, rectangle.width/2);
+
+            asteroidColor = new Color(255,0,0,255);
+
+            asteroidMoveSpeed = 10;
+
+            hp = 200;
+        }
+        private void SpawnLocation()
+        {
             int randomConst = generator.Next(0,4);
             switch (randomConst)
             {
@@ -60,21 +75,46 @@ namespace Triangle2
                 OriginX = generator.Next(0, 1000);
                 break;
             }
-
-            asteroids.Add(this);
         }
         public static void UpdateAll()
         {
-            System.Console.WriteLine(asteroids.Count);
             for (int index = asteroids.Count - 1; index > 0; index--)
             {
+                // uppdatera position
                 asteroids[index].Update();
 
-                if (asteroids[index].Delete() || asteroids[index].OutOfBounds(index))
+                // om utanför spelarea -> tabort instans av astroid
+                if (asteroids[index].OutOfBounds(index))
                 {
                     asteroids.Remove(asteroids[index]);
                 }
+                // annars titta om kollision
+                else
+                {
+                    asteroids[index].CollisionWithLine(index);
+                }
             }
+        }
+
+        private List<Line2> lineList = Line2.GetLines;
+        private void CollisionWithLine(int asteroidIndex)
+        {
+            for (int index = lineList.Count - 1; index > 0; index--)
+            {
+                // om skott krockar med astroid
+                if (Raylib.CheckCollisionCircleRec(asteroids[asteroidIndex].circlePos, 60, lineList[index].GetRect))
+                {
+                    // - skott dmg && ta bort skott
+                    asteroids[asteroidIndex].hp -= lineList[index].GetDamage; 
+                    Line2.RemoceInstanceOfLine(index);
+
+                    // om hp efter -dmg >=0 ta bort astroid också
+                    if (asteroids[asteroidIndex].hp <= 0)
+                    {
+                        asteroids.Remove(asteroids[asteroidIndex]);
+                    }
+                }
+            }            
         }
         
         public static void DrawAll()
@@ -84,6 +124,13 @@ namespace Triangle2
                 asteroids[index].Draw();
             }
         }
+        private void Draw()
+        {
+            Raylib.DrawRectanglePro(rectangle, centerOfRect, randDegree, asteroidColor);
+            Raylib.DrawCircleV(circlePos, 60, InvisColorForHitbox);
+        }
+
+
         private bool OutOfBounds(int index)
         {
             if (asteroids[index].x > 1250 || asteroids[index].y > 1250 || asteroids[index].x < -250 || asteroids[index].y < -250)
@@ -94,40 +141,18 @@ namespace Triangle2
             return false;
         }
 
-        private List<Line2> lineList = Line2.GetLines;
-        private bool Delete()
-        {
-            for (int index = lineList.Count - 1; index > 0; index--)
-            {
-                if (Raylib.CheckCollisionCircleRec(circlePos, 60, lineList[index].GetRect) == true)
-                {
-                    Line2.RemoceInstanceOfLine(index);
-                    return true;
-                }
-            }            
-
-            return false;
-        }
-
         private void Update()
         {
-            hypotenuse -= 1;
+            asteroidMoveSpeed -= 1;
 
-            x = ((Math.Cos(randDegree) * hypotenuse) + OriginX);
-            y = ((Math.Sin(randDegree) * hypotenuse) + OriginY);
+            x = ((Math.Cos(randDegree) * asteroidMoveSpeed) + OriginX);
+            y = ((Math.Sin(randDegree) * asteroidMoveSpeed) + OriginY);
 
             rectangle.x = (float)x;
             rectangle.y = (float)y;
 
             circlePos = new Vector2((float)x,(float)y);
         }
-        Color colo = new Color(255,0,0,128);
-        private void Draw()
-        {
-            Raylib.DrawRectanglePro(rectangle, centerOfRect, randDegree, Color.GOLD);
-            Raylib.DrawCircleV(circlePos, 60, colo);
-        }
-
 
 
 

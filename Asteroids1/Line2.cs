@@ -38,7 +38,7 @@ namespace Triangle2
 
         private void Update()
         {
-            hypotenuse -= 10;
+            hypotenuse -= 15;
 
             x = ((Math.Cos(v) * hypotenuse) + OriginX);
             y = ((Math.Sin(v) * hypotenuse) + OriginY);
